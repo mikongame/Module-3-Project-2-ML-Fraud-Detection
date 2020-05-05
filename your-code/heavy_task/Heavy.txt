@@ -1,1 +1,0 @@
-That folder will contain notebooks with very resources demmanding tasks and its results' data exports.
