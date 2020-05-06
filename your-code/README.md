@@ -3,7 +3,7 @@
 
 #   Project Ironhack Data Bootcamp: Job offers' Fraud-Detection with NLP
 
-Miguel Ángel Ávalos Barrios, Javier Carrasco Morente, Miguel García MElgar and Karla Vizcarra
+Miguel Ángel Ávalos Barrios, Javier Carrasco Morente, Miguel García Melgar and Karla Vizcarra
 
 *Data Part Time Barcelona Dic 2019*
 
