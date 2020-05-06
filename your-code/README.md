@@ -35,7 +35,6 @@ The technical requirements for this project have been:
 The following deliverables were pushed to our Github repo for this chapter.
 
 * **A Jupyter Notebook (fraud-detection_NLP.ipynb)** containing our Python codes, outputs, and data visualizations. Making sure to include explanations for each step in Markdown cells or Python comments.
-* **A Jupyter Notebook (fraud-detection_NLP.ipynb)** containing our Python codes, outputs, and data visualizations. Making sure to include explanations for each step in Markdown cells or Python comments.
 * **A folder named "data"** containing the dataset we used as well as "heavy" data we exported from our notebook.
 * **A folder named "images"** containing the images we used as input in our EDA and some plots we exported.
 * **This README.md** containing a detailed explanation of the followed approach for carrying out this project.
