@@ -1,52 +1,32 @@
-<img src="https://bit.ly/2VnXWr2" alt="Ironhack Logo" width="100" align="right"/>
+<img src="https://bit.ly/2VnXWr2" alt="Ironhack Logo" width="100"/>
 
+# Project Ironhack Data Bootcamp: Job offers' Fraud-Detection with NLP
+**Miguel Ángel Ávalos Barrios, Javier Carrasco Morente, Miguel García Melgar and Karla Vizcarra**
 
-#   Project Ironhack Data Bootcamp: Job offers' Fraud-Detection with NLP
-
-Miguel Ángel Ávalos Barrios, Javier Carrasco Morente, Miguel García Melgar and Karla Vizcarra
-
-*Data Part Time Barcelona Dic 2019*
-
+*Data Analytics Part-Time, Barcelona, Dec19*
 
 ## Content
-- [Project Description](#project)
-- [Dataset](#Dataset)
+- [Project Description](#project-description)
+- [Objective](#objective)
+- [Dataset](#dataset)
+- [Introduction](#introduction)
 - [Workflow](#workflow)
-- [Results](#results)
-
-<a name="project"></a>
+  * [Exploratory Data Analysis](#exploratory-data-analysis)
+  * [Preprocessing](#preprocessing)
+  * [Model Training and Evaluation](#model-training-and-evaluation)
+  * [Conclusion](#conclusion)
+- [Future improvements](#future-improvements)
+- [Tools and requirements](#tools-and-requirements)
+- [Links](#links)
 
 ## Project Description
+In order to experience how to work in a ML project as a group and to learn more on NLP, we have been working on a job offers' dataset so as to train a classification model able to distinguish genuine from fraudulent offers.
 
-### Overview
-
-In order to experience how to work in a ML project as a group, and to learn more on NLP we have been working on a job offers' dataset so as to train a classification model able to distinguish genuine from fraudulent offers.
-
-
-### Technical Requirements (not yet)
-
-The technical requirements for this project have been:
-
-* Trying to apply everything I have learned so far about data analysis such as data cleaning, data manipulation, data visualization, and various statistical analysis methods.
-
-
-### Deliverables (not yet)
-
-The following deliverables were pushed to our Github repo for this chapter.
-
-* **A Jupyter Notebook (fraud-detection_NLP.ipynb)** containing our Python codes, outputs, and data visualizations. Making sure to include explanations for each step in Markdown cells or Python comments.
-* **A folder named "data"** containing the dataset we used as well as "heavy" data we exported from our notebook.
-* **A folder named "images"** containing the images we used as input in our EDA and some plots we exported.
-* **This README.md** containing a detailed explanation of the followed approach for carrying out this project.
-
-<a name="Datasets"></a>
+## Objective
+We mainly wanted to create a **classification model using text data features and meta-features to predict which job descriptions are fraudulent**. As well as, finding out if there are **key traits/features** (words, entities, phrases) of job descriptions which are **intrinsically fraudulent**.
 
 ## Dataset
- 
-We used this dataset from Kaggle, [[Real or Fake] Fake JobPosting Prediction](https://www.kaggle.com/shivamb/real-or-fake-fake-jobposting-prediction), that holds around 18K job descriptions out of which about 900 are fake. The data consists of both textual information and meta-information about the jobs. 
-  
-<a name="workflow"></a>
-
+We used this dataset from Kaggle, [[Real or Fake] Fake JobPosting Prediction](https://www.kaggle.com/shivamb/real-or-fake-fake-jobposting-prediction), that holds around 18K job descriptions out of which about 900 are fake. The data consists of both textual information and meta-information about the jobs.
 
 ## Introduction
 
@@ -70,91 +50,98 @@ As said above, we've worked on a dataset of job descriptions and their meta info
 * `required_education` Doctorate, Master’s Degree, Bachelor, etc.
 * `industry Automotive` IT, Health care, Real estate, etc.
 * `function Consulting` Engineering, Research, Sales etc.
-* `fraudulent` **target** Classification attribute
+* `fraudulent` **target** Classification attribute.
 
+## Workflow
+### Exploratory Data Analysis
+First off all, we checked how the data looked like as well as its shape, columns and dtypes. Then we confirmed there where no nulls or duplicates.
 
-## Workflow (not yet)
-
-###  Introduction
-####  Objectives
-####  Imports
-
-###  1. Exploratory Data Analysis
-####  Context
-####  Global EDA
 #### Numerical columns
-#### Categorical variables: Here we plotted every categorical column plus we created a BoW of long-text categorical variables by tokenizing with spaCy.
+<img src="images/num_correlation.png" align="middle">
+With the raw data we can only find a single correlationship with the target "fraudulent" that is somewhat significative:
+* It seems it is slightly more common for fraudulent job offers to not contain the company logo, though the relationship is of -0.26.
 
-###  2. Preprocessing
-####  Categorical: It refers to columns of categorical variables which are not whole sentences/paragraphs. We cleaned them and used One-Hot Encoding.
-####  Numerical: We created a new salary range column that indicates presence or absence of salary in the previouys salary range column or listed in benefits.
-####  Text: It refers to columns of categorical variables which are whole sentences/paragraphs. Those columns have been combined into 1 and have been cleaned and lemmatized to form new BoW based on it's lemmes. After that we use TF-IDF to vectorize each word.
+*It is important to notice than those variables are actually binary categorical variables, but we'll keep calling them numerical throughout the project *
+
+#### Categorical variables 
+Here we plotted every categorical column using masked wordclouds, standing for those that were originally short pieces of text with limited variablility, plus we created a BoW of long-text categorical variables by tokenizing with SpaCy.
+
+<img src="images/output_images/google_logo.png" align="middle">
+
+### Preprocessing
+
+#### Categorical
+We cleaned them and used One-Hot Encoding.
+
+#### Numerical
+Here we created a new salary range column that indicates presence or absence of salary in the previouys salary range column or listed in benefits.
+
+#### Text
+*It refers to columns of categorical variables which are whole sentences/paragraphs.*
+
+* Those columns have been combined into 1 and have been cleaned and lemmatized, using SpaCy, to form a new BoW based on it's lemmas.
+* Once cleaned we transformed the corpus of the text to a matrix using TfidfVectorizer.
+* As the sparse matrix was quite big, its dimensionality was reduced using UMAP.
+  
 #### Merge
+Enclosing preprocessing, we have merge the 3 resulting datasets from previous steps; the one with categorical variables' dummies, the numerical columns and the two dimensions resulting from UMAP. 
 
-###  3. Model building and evaluation
-####  Undersampling of the dataset and trial of 12 different classification methods to train our model.
+### Model Training and Evaluation
 
-###  4. Hyperparameter Tunning of the Models (not yet)
+#### Undersampling the dataset
+Due to big differences in the number of fraudulent vs non-fraudulent jobs, we used InstanceHardnessThreshold to fix imbalance through undersampling.
 
-###  5. Ensemble (not yet)
+#### Machine Learning Models
+ Few models were trained using different algorithms on the resampled dataset: 
+* The algorithms used were `SVC`, `MultinomialNB`,`LinearSVC`, `LogisticRegression`, `BernoulliNB`, `GradientBoostingClassifier`,`MLPClassifier`, `KNeighborsClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier` and `GaussianNB`.
 
+<img src="images/models_evaluation.PNG" align="middle">
 
-## Conclusions (not yet)
+The table shows the results of training the different algorithms on the resampled dataset. The best results, looking for high specificities while still having high F1 scores, were obtained from MLPClassifier, KNeighborsClassifier, DecisionTreeClassifier and RandomForestClassifier.
 
-##### Hofstede's six-dimensions model (2015) correlations
+#### Fine tuning of the best models (cambiar)
+Althought the metrics of the different models are really good, we can still improve the performance of the models. Therefore, a fine tuning of the different parameters of the best models was performed.
 
-**Most correlations seem to be negligible but there's still some significant ones:**
-`Power distance` highly negatively correlates with `Individualism vs Collectivism`, and has low but significant correlations with `Uncertainty Avoidance`, positively, and negativley with  `Indulgence vs Restraint`. The latter also correlates moderately negatively with `Long Term versus Short Term Orientation`.
+<img src="images/tuned_types.PNG" align="middle">
 
-So the **more hierarchy** is accepted in a country, the **more colectivistic** the culture seems being also quite probable citizens' tendency to **avoid risk** and **surpress emotions and pleasure**.
-In those countries where **pleasure seek is indulged**, usually there's also a common tendencty to think in the **short-term future**.
+### Conclusion (cambiar)
 
-##### World Happiness Report 2015
+The model trained has an F1 Score of 0.651957, that is, this model can predict MBTI personality type 65,2% of times.
 
-**As the 6 indexes the test uses were chosen from factorizing Happiness Score, we will just focus on correletions between them.**
-They all positively correlate except `Generosity` with a negligible negative correlation with `Economy`.
-Moreover, the top 3 correlations, being correlations over 0.5, are the top 3 Happiness Score factors: `Economy`, `Family` and `Health`.
+Despite not seeming particularly outstanding results, as a multiclass classification (16 types), randomness baseline was located at 6.25%. So predictions from this model would be more than 10 times more accurate than guessing.
 
-##### Comments about VGC 2020 Usage % and Base Stats Mean relationship
+## Future improvements (cambiar)
+Future improvements would include further hyperparameter tuning, training the best couple of models using better-balanced samples and testing the resulting best model on a completely different sample.  
 
-Pokémon's usage in VGC 2020 online competitions seems to be ***positively correlated*** with each Pokémon's Base Stats Mean forming a ***logarithmic growth*** so that Stats Means grow a lot without affecting much to VGC Usage %, and from 70 base stats means, usage starts increasing really fast, and it almost stops growing from 85-90 mean values.
-
-##### Correlations of the merged and standardized dataset (Happiness Score + 6 cultural dimensions)
-**Most correlations seem to be negligible but there's still some significant ones:**
-`Happiness Score` highly positively correlates with `Indulgence vs Restraint`(0.73), and moderately correlates with `Power distance` and `Individualism vs Collectivism`, respectively in a negative (-0.56) and in a positive(0.44) way.
-
-So that **higher levels of happiness** are registered in coutries where **pleasure seek is indulged** and can be described as **egalitarian** and **individualistic**.
-
-##### Hypothesis testing
-As the hypothesis were sided and we have standardized data a one sided T-Test with a 95% confidence interval was performed. 
-
-H0: Individualistic societies are happier (>) than colectivistic ones.
-H1: Individualistic societies aren't happier (<=) than colectivistic ones.
-
-With a stat=0.445 and p=0.001; **H0 has been accepted**.
+Ideally, I would also like to adapt it to the Big Five model, as is the personality models of the highest predictive validity. Still, adapting it/ doing a new similar model for predicting other psychological metrics out of text would be mesmerizing too.
 
 
-##### According to the regression analysis using a multivariate OLS model:
+## Tools and requirements
+In order to train more models simultaneously, we've been both using Jupyter Notebooks on our own machines and also using default virtual machines with Google Colab.
 
-The most important variables in the model are, in this order, "ind", "lto", "pdi" and "idv"; having an R-squared of 0.759, so that a lot of its variability depends on the variables included in the model.
+We have also used the latest Conda with the last version of the following packages and libraries:
+* os
+* pandas
+* numpy
+* scipy
+* math
+* random
+* seaborn
+* matplotlib
+* PIL
+* wordcloud
+* re
+* itertools
+* spacy
+* en_core_web_sm
+* string
+* collections
+* pickle
+* umap
+* imblearn
+* sklearn 
 
-It is kinda curious as its correlations coefficient were:
+## Links
+[Repository](https://github.com/mikongame/Module-3-Project-2-ML-Fraud-Detection/tree/develop/your-code)  
 
-- `Indulgence vs Restraint` = 0.73, which is coherent with the regression coefficient of 0.77
-- `Power - distance` = -0.56, differing in size from the regression coefficient, -0.21
-- `Individualism vs Collectivism` = 0.44, which as PDI has a regression coef "halving" its correlation one being  0.163
-- `Long Term vs Short Term Orientation` = -0.11, which is pretty interesting as its regression coefficient doubles and turns positive, 0.23
-
-##### After doing a PCA
-
-**87,9% of variance can be explained with 4 of the 6 possible components**, they're probably the top 4 obtained from the regression model but we can't be sure. 
-
-We have also seen that with a 5th component 95% of the variability would be explained, but remember there were just 6, so it is not really a good idea to focus on few components we you are already using just a few.
-
-## Future Improvements (not yet)
-
-* We have to find out why correlation coeficients differ but one of the main issues could be that the sample was not that big and it had to be reduced a lot. 
-
-* There are currently 247 countries but one of our datasets had results from 111 countries and the other only considered 158 and they didn't always coincide plus there were some NaN values. We ended up with a dataset of just 57 countries' results. I should try to look for more complete and up-to-date data.
-
-* It would be interesting to analyze how other indexes that conform Happiness Score correlate with the 6 cultural dimensions.
+[Slides](https://drive.google.com/file/d/1yxGmtVNFPa4AZYL16zA0mP8AgQVconof/view?usp=sharing) cambiar
