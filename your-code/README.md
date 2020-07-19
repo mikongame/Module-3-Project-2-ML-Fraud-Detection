@@ -54,7 +54,13 @@ As said above, we've worked on a dataset of job descriptions and their meta info
 
 ## Workflow
 ### Exploratory Data Analysis
-First off all, we checked how the data looked like as well as its shape, columns and dtypes. Then I confirmed there where no nulls or duplicates.
+First off all, we checked how the data looked like as well as its shape, columns and dtypes. Then we confirmed there where no nulls or duplicates.
+#### Numerical columns
+With the raw data we can only find a single correlationship with the target "fraudulent" that is somewhat significative:
+
+It seems it is slightly more common for fraudulent job offers to not contain the company logo, though the relationship is of -0.26.
+#### Categorical variables 
+Here we plotted every categorical column plus we created a BoW of long-text categorical variables by tokenizing with spaCy.
 
 <img src="images/output_images/mbti_count.png" align="middle">
 
@@ -112,9 +118,9 @@ Ideally, I would also like to adapt it to the Big Five model, as is the personal
 
 
 ## Tools and requirements
-In order to train more models simultaneously, I've been both using Jupyter Notebooks on my own machine and also using default virtual machines with Google Colab.
+In order to train more models simultaneously, we've been both using Jupyter Notebooks on our own machines and also using default virtual machines with Google Colab.
 
-I have also used the latest Conda  with the last version of the following packages and libraries:
+We have also used the latest Conda with the last version of the following packages and libraries:
 * os
 * pandas
 * numpy
@@ -132,14 +138,11 @@ I have also used the latest Conda  with the last version of the following packag
 * string
 * collections
 * pickle
-* umap-learn
-* yellowbrick
+* umap
+* imblearn
 * sklearn 
-* keras
 
 ## Links
-[Repository](https://github.com/mikongame/NLP-to-predict-Myers-Briggs-Personality-Type)  
+[Repository](https://github.com/mikongame/Module-3-Project-2-ML-Fraud-Detection/tree/develop/your-code)  
 
-[Slides](https://drive.google.com/file/d/1yxGmtVNFPa4AZYL16zA0mP8AgQVconof/view?usp=sharing) 
-
-[Presentation](https://youtu.be/1IOTOnmpWTI)
+[Slides](https://drive.google.com/file/d/1yxGmtVNFPa4AZYL16zA0mP8AgQVconof/view?usp=sharing) cambiar
