@@ -93,11 +93,11 @@ Due to big differences in the number of fraudulent vs non-fraudulent jobs, we us
 
 #### Machine Learning Models
  Few models were trained using different algorithms on the resampled dataset: 
-* The algorithms used were `SVC`, `MultinomialNB`,`LinearSVC`, `LogisticRegression`, `BernoulliNB`, `GradientBoostingClassifier`,`MLPClassifier`, `KNeighborsClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`,  and `GaussianNB`.
+* The algorithms used were `SVC`, `MultinomialNB`,`LinearSVC`, `LogisticRegression`, `BernoulliNB`, `GradientBoostingClassifier`,`MLPClassifier`, `KNeighborsClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier` and `GaussianNB`.
 
 <img src="images/models_evaluation.PNG" align="middle">
 
-* The table shows the results of training the different algorithms on the resampled dataset. The best results, looking for high specificities while still having high f1 scores, were obtained from MLPClassifier, KNeighborsClassifier, DecisionTreeClassifier and RandomForestClassifier.
+The table shows the results of training the different algorithms on the resampled dataset. The best results, looking for high specificities while still having high F1 scores, were obtained from MLPClassifier, KNeighborsClassifier, DecisionTreeClassifier and RandomForestClassifier.
 
 #### Fine tuning of the best models (cambiar)
 Althought the metrics of the different models are really good, we can still improve the performance of the models. Therefore, a fine tuning of the different parameters of the best models was performed.
