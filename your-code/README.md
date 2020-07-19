@@ -66,7 +66,7 @@ With the raw data we can only find a single correlationship with the target "fra
 #### Categorical variables 
 Here we plotted every categorical column using masked wordclouds, standing for those that were originally short string with limited variablility, plus we created a BoW of long-text categorical variables by tokenizing with SpaCy.
 
-<img src="images/output_images/google_logo.png" align="middle">
+<img src="images/output_images/google_logo.png" align="right">
 
 ### Preprocessing
 * I used SpaCy to clean and lemmatise the words from each post.
