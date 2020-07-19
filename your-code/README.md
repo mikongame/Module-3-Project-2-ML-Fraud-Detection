@@ -77,15 +77,14 @@ We cleaned them and used One-Hot Encoding.
 Here we created a new salary range column that indicates presence or absence of salary in the previouys salary range column or listed in benefits.
 
 #### Text
-*It refers to columns of categorical variables which are whole sentences/paragraphs.* 
- After that, we used TF-IDF to vectorize each word.
+*It refers to columns of categorical variables which are whole sentences/paragraphs.*
 
 * Those columns have been combined into 1 and have been cleaned and lemmatized, using SpaCy, to form a new BoW based on it's lemmas.
 * Once cleaned we transformed the corpus of the text to a matrix using TfidfVectorizer.
 * As the sparse matrix was quite big, its dimensionality was reduced using UMAP.
   
 #### Merge
-Enclosing preprocessing, we have merge the 3 resulting datasets from previous steps: The one with categorical variables' dummies, the numerical columns and the two dimensions resulting from UMAP. 
+Enclosing preprocessing, we have merge the 3 resulting datasets from previous steps; the one with categorical variables' dummies, the numerical columns and the two dimensions resulting from UMAP. 
 
 ### Model Training and Evaluation
 
@@ -93,15 +92,15 @@ Enclosing preprocessing, we have merge the 3 resulting datasets from previous st
 Due to big differences in the number of fraudulent vs non-fraudulent jobs, we used InstanceHardnessThreshold to fix imbalance through undersampling.
 
 #### Machine Learning Models
- Few modelswere trained using different algorithms on the resampled dataset: 
-* The algorithms used were `GaussianNB`, `LogisticRegression`, `KNeighborsClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `GradientBoostingClassifier` and `MLPClassifier`.
+ Few models were trained using different algorithms on the resampled dataset: 
+* The algorithms used were `SVC`, `MultinomialNB`,`LinearSVC`, `LogisticRegression`, `BernoulliNB`, `GradientBoostingClassifier`,`MLPClassifier`, `KNeighborsClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`,  and `GaussianNB`.
 
-<img src="https://github.com/mikongame/NLP-to-predict-Myers-Briggs-Personality-Type/blob/master/images/Model_TSVD_Types.PNG?raw=true" align="middle">
+<img src="images/models_evaluation.PNG" align="middle">
 
-* The table shows the results of training the different algorithms with the results from applying TSVD (100 components) to reduce the dimensionality of the types' dataset without resampling, as the best results were obtained from GraddientBoostingClassiffier using this particular sample.
+* The table shows the results of training the different algorithms on the resampled dataset. The best results, looking for high specificities while still having high f1 scores, were obtained from MLPClassifier, KNeighborsClassifier, DecisionTreeClassifier and RandomForestClassifier.
 
 #### Fine tuning of the best models (cambiar)
-Althought the metrics of the different models are really good, we can still improve the performance of the models. Therefore, a fine tuning of the different parameters of each models was performed.
+Althought the metrics of the different models are really good, we can still improve the performance of the models. Therefore, a fine tuning of the different parameters of the best models was performed.
 
 <img src="images/tuned_types.PNG" align="middle">
 
