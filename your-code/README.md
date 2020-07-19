@@ -1,7 +1,7 @@
 <img src="https://bit.ly/2VnXWr2" alt="Ironhack Logo" width="100"/>
 
-# Natural Language Processing to predict Myers-Briggs Personality Type
-**Miguel García Melgar**
+# Project Ironhack Data Bootcamp: Job offers' Fraud-Detection with NLP
+**Miguel Ángel Ávalos Barrios, Javier Carrasco Morente, Miguel García Melgar and Karla Vizcarra**
 
 *Data Analytics Part-Time, Barcelona, Dec19*
 
@@ -9,6 +9,7 @@
 - [Project Description](#project-description)
 - [Objective](#objective)
 - [Dataset](#dataset)
+- [Introduction](#introduction)
 - [Workflow](#workflow)
   * [Exploratory Data Analysis](#exploratory-data-analysis)
   * [Preprocessing](#preprocessing)
@@ -19,25 +20,41 @@
 - [Links](#links)
 
 ## Project Description
-To learn more on NLP while applying its methods to psychological variables, I have been working on this dataset from Kaggle, [(MBTI) Myers-Briggs Personality Type Dataset](https://www.kaggle.com/datasnaek/mbti-type) which holds information on a forum's users' posts and personalities using MBTI.
+In order to experience how to work in a ML project as a group and to learn more on NLP, we have been working on a job offers' dataset so as to train a classification model able to distinguish genuine from fraudulent offers.
 
 ## Objective
-The IT labour market is getting more and more competitive, as there is more demand than professionals offer. And of course, everyone wants the best of the best for their company.
-
-Finding the best talent and ensuring they culturally fit in their organizations means a lot of time, effort and money to invest in material, software and personality, intelligence and competency measures for Recruitment Teams; even when they have increasingly amounts of candidates' information.
-
-I want to shorten recruitment times and costs in psychometric tests.
-
-So starting with personality tests I pretend to train a model to use text we get from candidates (social networks, cover letters, CV, etc).
-
-To sum up, in this project I want to train a **classification model using text data features and meta-features from each user comments, messages and posts to predict their personalities**.
+We mainly wanted to create a **classification model using text data features and meta-features to predict which job descriptions are fraudulent**. As well as, finding out if there are **key traits/features** (words, entities, phrases) of job descriptions which are **intrinsically fraudulent**.
 
 ## Dataset
-I have been working on this dataset from Kaggle, [(MBTI) Myers-Briggs Personality Type Dataset](https://www.kaggle.com/datasnaek/mbti-type), that holds data collected through the [PersonalityCafe forum](http://personalitycafe.com/forum/), as it provides a large selection of people and their MBTI personality type, as well as what they have written. So I was working with only two variables, both of them being categorical, `type`(personality type code and my target) and `posts` (50 latest posts of each user).
+We used this dataset from Kaggle, [[Real or Fake] Fake JobPosting Prediction](https://www.kaggle.com/shivamb/real-or-fake-fake-jobposting-prediction), that holds around 18K job descriptions out of which about 900 are fake. The data consists of both textual information and meta-information about the jobs.
+
+## Introduction
+
+As said above, we've worked on a dataset of job descriptions and their meta information in which a small proportion of these descriptions were fake or scam, which can be identified by the column "fraudulent".
+
+**Columns**:
+* `job_id` Unique Job ID
+* `title` The title of the job ad entry.
+* `location` Geographical location of the job ad.
+* `department` Corporate department (e.g. sales).f
+* `salary_range` Indicative salary range (e.g. $50,000-$60,000)
+* `company_profile` A brief company description.
+* `description` The details description of the job ad.
+* `requirements` Enlisted requirements for the job opening.
+* `benefits` Enlisted offered benefits by the employer.
+* `telecommuting` True for telecommuting positions.
+* `has_company_logo` True if company logo is present.
+* `has_questions` True if screening questions are present.
+* `employment_type` Full-type, Part-time, Contract, etc.
+* `required_experience` Executive, Entry level, Intern, etc.
+* `required_education` Doctorate, Master’s Degree, Bachelor, etc.
+* `industry Automotive` IT, Health care, Real estate, etc.
+* `function Consulting` Engineering, Research, Sales etc.
+* `fraudulent` **target** Classification attribute.
 
 ## Workflow
 ### Exploratory Data Analysis
-First off all, I checked how the data looked like as well as its shape, columns and dtypes. Then I confirmed there where no nulls or duplicates.
+First off all, we checked how the data looked like as well as its shape, columns and dtypes. Then I confirmed there where no nulls or duplicates.
 
 <img src="images/output_images/mbti_count.png" align="middle">
 
