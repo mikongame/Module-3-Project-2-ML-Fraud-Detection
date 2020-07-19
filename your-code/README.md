@@ -55,10 +55,12 @@ As said above, we've worked on a dataset of job descriptions and their meta info
 ## Workflow
 ### Exploratory Data Analysis
 First off all, we checked how the data looked like as well as its shape, columns and dtypes. Then we confirmed there where no nulls or duplicates.
-#### Numerical columns
-With the raw data we can only find a single correlationship with the target "fraudulent" that is somewhat significative:
 
-It seems it is slightly more common for fraudulent job offers to not contain the company logo, though the relationship is of -0.26.
+#### Numerical columns
+<img src="images/num_correlation.png" align="middle">
+With the raw data we can only find a single correlationship with the target "fraudulent" that is somewhat significative:
+* It seems it is slightly more common for fraudulent job offers to not contain the company logo, though the relationship is of -0.26.
+
 #### Categorical variables 
 Here we plotted every categorical column plus we created a BoW of long-text categorical variables by tokenizing with spaCy.
 
