@@ -18,59 +18,7 @@ Miguel Ángel Ávalos Barrios, Javier Carrasco Morente, Miguel García Melgar an
 
 ## Project Description
 
-### Overview
 
-In order to experience how to work in a ML project as a group, and to learn more on NLP we have been working on a job offers' dataset so as to train a classification model able to distinguish genuine from fraudulent offers.
-
-
-### Technical Requirements (not yet)
-
-The technical requirements for this project have been:
-
-* Trying to apply everything I have learned so far about data analysis such as data cleaning, data manipulation, data visualization, and various statistical analysis methods.
-
-
-### Deliverables (not yet)
-
-The following deliverables were pushed to our Github repo for this chapter.
-
-* **A Jupyter Notebook (fraud-detection_NLP.ipynb)** containing our Python codes, outputs, and data visualizations. Making sure to include explanations for each step in Markdown cells or Python comments.
-* **A folder named "data"** containing the dataset we used as well as "heavy" data we exported from our notebook.
-* **A folder named "images"** containing the images we used as input in our EDA and some plots we exported.
-* **This README.md** containing a detailed explanation of the followed approach for carrying out this project.
-
-<a name="Datasets"></a>
-
-## Dataset
- 
-We used this dataset from Kaggle, [[Real or Fake] Fake JobPosting Prediction](https://www.kaggle.com/shivamb/real-or-fake-fake-jobposting-prediction), that holds around 18K job descriptions out of which about 900 are fake. The data consists of both textual information and meta-information about the jobs. 
-  
-<a name="workflow"></a>
-
-
-## Introduction
-
-As said above, we've worked on a dataset of job descriptions and their meta information in which a small proportion of these descriptions were fake or scam, which can be identified by the column "fraudulent".
-
-**Columns**:
-* `job_id` Unique Job ID
-* `title` The title of the job ad entry.
-* `location` Geographical location of the job ad.
-* `department` Corporate department (e.g. sales).f
-* `salary_range` Indicative salary range (e.g. $50,000-$60,000)
-* `company_profile` A brief company description.
-* `description` The details description of the job ad.
-* `requirements` Enlisted requirements for the job opening.
-* `benefits` Enlisted offered benefits by the employer.
-* `telecommuting` True for telecommuting positions.
-* `has_company_logo` True if company logo is present.
-* `has_questions` True if screening questions are present.
-* `employment_type` Full-type, Part-time, Contract, etc.
-* `required_experience` Executive, Entry level, Intern, etc.
-* `required_education` Doctorate, Master’s Degree, Bachelor, etc.
-* `industry Automotive` IT, Health care, Real estate, etc.
-* `function Consulting` Engineering, Research, Sales etc.
-* `fraudulent` **target** Classification attribute
 
 
 ## Workflow (not yet)
