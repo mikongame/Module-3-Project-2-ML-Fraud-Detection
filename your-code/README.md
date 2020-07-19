@@ -64,50 +64,54 @@ With the raw data we can only find a single correlationship with the target "fra
 *It is important to notice than those variables are actually binary categorical variables, but we'll keep calling them numerical throughout the project *
 
 #### Categorical variables 
-Here we plotted every categorical column using masked wordclouds, standing for those that were originally short string with limited variablility, plus we created a BoW of long-text categorical variables by tokenizing with SpaCy.
+Here we plotted every categorical column using masked wordclouds, standing for those that were originally short pieces of text with limited variablility, plus we created a BoW of long-text categorical variables by tokenizing with SpaCy.
 
-<img src="images/output_images/google_logo.png" align="right">
+<img src="images/output_images/google_logo.png" align="middle">
 
 ### Preprocessing
-* I used SpaCy to clean and lemmatise the words from each post.
-* Once cleaned I transformed the corpus of the text to a matrix using TfidfVectorizer.
-* As the sparse matrix was quite big I tried on 3 different ways to reduce its dimensionality:
-  * Using Truncated SVD with 100 components.
-  * Using UMAP.
-  * Using Truncated SVD and then UMAP on its results.
-* Enclosing preprocessing, I encoded my target labels i two different ways. One would use all 16 types, and the other would rather focus on its 4 axes. Thereafter, I created 6 different datasets that I will use to train the models by combining each dimensionality reduction strategy which each kind of labelling the target variable. 
+
+#### Categorical
+We cleaned them and used One-Hot Encoding.
+
+#### Numerical
+Here we created a new salary range column that indicates presence or absence of salary in the previouys salary range column or listed in benefits.
+
+#### Text
+*It refers to columns of categorical variables which are whole sentences/paragraphs.* 
+ After that, we used TF-IDF to vectorize each word.
+
+* Those columns have been combined into 1 and have been cleaned and lemmatized, using SpaCy, to form a new BoW based on it's lemmas.
+* Once cleaned we transformed the corpus of the text to a matrix using TfidfVectorizer.
+* As the sparse matrix was quite big, its dimensionality was reduced using UMAP.
+  
+#### Merge
+Enclosing preprocessing, we have merge the 3 resulting datasets from previous steps: The one with categorical variables' dummies, the numerical columns and the two dimensions resulting from UMAP. 
 
 ### Model Training and Evaluation
+
+#### Undersampling the dataset
+Due to big differences in the number of fraudulent vs non-fraudulent jobs, we used InstanceHardnessThreshold to fix imbalance through undersampling.
+
 #### Machine Learning Models
-From the 6 datasets mentioned above, I trained quite a few models by combining different algorithms for each dataset, and each target, but also with the original dataset size and also with resampled versions:
+ Few modelswere trained using different algorithms on the resampled dataset: 
 * The algorithms used were `GaussianNB`, `LogisticRegression`, `KNeighborsClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `GradientBoostingClassifier` and `MLPClassifier`.
-* So using 7 models, 2 sample sizes, 5 different labels (type + 4 possible dimensions) and 3 dimensionality reduction methods, I ended up training 210 different models. 
 
 <img src="https://github.com/mikongame/NLP-to-predict-Myers-Briggs-Personality-Type/blob/master/images/Model_TSVD_Types.PNG?raw=true" align="middle">
 
 * The table shows the results of training the different algorithms with the results from applying TSVD (100 components) to reduce the dimensionality of the types' dataset without resampling, as the best results were obtained from GraddientBoostingClassiffier using this particular sample.
-#### Deep Learning Models
 
-Before proceeding further with hyperparameters tuning of the ML models previously evalueted, I lets try with a combinatio nof unsupervised ML and DL.
-
-I will use GloVe, an unsupervised learning algorithm for obtaining vector representations for words, altogether with a LSTM recurrent neural network to train two models, one for personality types and another one for dimensional trait axes.
-
-<img src="images/output_images/types_history.png" align="middle">
-<img src="images/output_images/dimensions_history.png" align="middle">
-
-As you can see the results are lower than the ones using Gradient Booster and Random Forest.
-
-#### Fine tuning of the best models
+#### Fine tuning of the best models (cambiar)
+Althought the metrics of the different models are really good, we can still improve the performance of the models. Therefore, a fine tuning of the different parameters of each models was performed.
 
 <img src="images/tuned_types.PNG" align="middle">
 
-### Conclusion
+### Conclusion (cambiar)
 
 The model trained has an F1 Score of 0.651957, that is, this model can predict MBTI personality type 65,2% of times.
 
 Despite not seeming particularly outstanding results, as a multiclass classification (16 types), randomness baseline was located at 6.25%. So predictions from this model would be more than 10 times more accurate than guessing.
 
-## Future improvements
+## Future improvements (cambiar)
 Future improvements would include further hyperparameter tuning, training the best couple of models using better-balanced samples and testing the resulting best model on a completely different sample.  
 
 Ideally, I would also like to adapt it to the Big Five model, as is the personality models of the highest predictive validity. Still, adapting it/ doing a new similar model for predicting other psychological metrics out of text would be mesmerizing too.
