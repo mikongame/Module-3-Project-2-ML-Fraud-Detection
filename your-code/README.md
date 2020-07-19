@@ -61,18 +61,12 @@ First off all, we checked how the data looked like as well as its shape, columns
 With the raw data we can only find a single correlationship with the target "fraudulent" that is somewhat significative:
 * It seems it is slightly more common for fraudulent job offers to not contain the company logo, though the relationship is of -0.26.
 
+*It is important to notice than those variables are actually binary categorical variables, but we'll keep calling them numerical throughout the project *
+
 #### Categorical variables 
-Here we plotted every categorical column plus we created a BoW of long-text categorical variables by tokenizing with spaCy.
+Here we plotted every categorical column using masked wordclouds, standing for those that were originally short string with limited variablility, plus we created a BoW of long-text categorical variables by tokenizing with SpaCy.
 
-<img src="images/output_images/mbti_count.png" align="middle">
-
-When I checked for unique values and target distribution I found out that in posts there was a unique value per entrance, and that the distribution was horribly unbalanced, especially considering distributions found by the original researchers and authors of this psychometric measure (MBTI).
-
-<img src="images/mbti_distr_spain.PNG" align="middle">
-
-Finally, I created a Bag of Words by tokenizing posts column using Spacy, so as to use them to create a word cloud and visualize text before starting cleaning it.
-
-<img src="images/output_images/mbti_token_cloud.png" align="middle">
+<img src="images/output_images/google_logo.png" align="middle">
 
 ### Preprocessing
 * I used SpaCy to clean and lemmatise the words from each post.
